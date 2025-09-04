@@ -1,2 +1,2 @@
-# stock-factor-decomposition
+# Stock Factor Decomposition
 
