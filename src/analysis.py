@@ -149,7 +149,7 @@ def plot_coeffs(coeffs, r2 = None, title = None):
     else:
         plot_coeffs_static(coeffs, r2 = r2, title = title or "Factor decomposition")
     
-def plot_coeffs_static(coeffs, r2=None, title="Factor decomposition"):
+def plot_coeffs_static(coeffs, r2 = None, title = "Factor decomposition"):
     color_map = {
         "alpha": "#6baed6",
         "MKT_RF": "#fd8d3c",
@@ -245,7 +245,7 @@ def plot_coeffs_rolling(coeffs, r2 = None, title = "Factor loadings over time"):
     plt.tight_layout()
     plt.show()
 
-def plot_alpha(coeffs, tstats, title="Alpha and t-statistic over time"):
+def plot_alpha(coeffs, tstats, title = "Alpha and t-statistic over time"):
     alpha = coeffs["alpha"] if isinstance(coeffs, dict) else coeffs
     tstat = tstats["alpha"] if isinstance(tstats, dict) else tstats
     _, ax = plt.subplots(figsize = (10, 6))
