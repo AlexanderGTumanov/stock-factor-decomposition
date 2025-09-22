@@ -35,25 +35,25 @@ Notebook `/notebooks/stock-factor-decomposition.ipynb` is divided into two secti
 
 The **analysis.py** file contains all the functions and tools used to perform analysis in the notebook. What follows is a brief description of them.
 
-- **get_returns(tickers, start, end)**:  
+- **`get_returns(tickers, start, end)`**:  
    &nbsp;&nbsp;&nbsp;This function retrieves a stock or a collection of stocks from **yfinance** between the dates specified by **start** and **end**, and converts the prices into simple returns. If **tickers** is a string containing a single ticker, the function returns the corresponding time series. If **tickers** is a list of tickers, the function returns a dictionary of the form ``{ticker: time series}``.
 
-- **get_factors(model, start, end)**:  
+- **`get_factors(model, start, end)`**:  
    &nbsp;&nbsp;&nbsp;This function retrieves factor data between the dates specified by **start** and **end** from the [Kenneth R. French Data Library](https://mba.tuck.dartmouth.edu). The parameter **model** accepts three possible values: `CAPM`, `FF3`, and `FF5`. The function returns a dictionary of the form ``{factor label: time series}``.
 
-- **factor_regression(returns, factors, precision = 2, window = None, step = None)**:  
+- **`factor_regression(returns, factors, precision = 2, window = None, step = None)`**:  
   &nbsp;&nbsp;&nbsp;This function computes the factor exposures of a given stock, or a dictionary of stocks, represented by **returns**, against the factors provided in the **factors** parameter. The regression model is automatically inferred from the contents of **factors**.  
   &nbsp;&nbsp;&nbsp;The optional parameter **precision** controls rounding of the results. By default, the entire input time series is used for the regression. If **window** is specified, the function performs rolling regressions. The parameter **step** sets the distance between consecutive window positions and defaults to 1% of the total series length.  
   &nbsp;&nbsp;&nbsp;The function returns **coeffs**, **tstats**, **pstats**, and **r2**. The first three are dictionaries mapping factor labels to their estimated coefficients, t-statistics, and p-values, respectively. **r2** gives the R² score of the regression. If **returns** is a dictionary of the form ``{ticker: time series}``, then all output variables follow the same overarching structure.
 
-- **plot_coeffs_static(coeffs, r2 = None, title = "Factor decomposition")**:  
+- **`plot_coeffs_static(coeffs, r2 = None, title = "Factor decomposition")`**:  
   &nbsp;&nbsp;&nbsp;This function plots a histogram of factor loadings provided by the **coeffs** output of **factor_regression** with **window = None**. If **r2** is supplied, it also plots a separate histogram of the corresponding R² scores.
 
-- **plot_coeffs_static(coeffs, r2 = None, title = "Factor decomposition")**:  
+- **`plot_coeffs_static(coeffs, r2 = None, title = "Factor decomposition")`**:  
   &nbsp;&nbsp;&nbsp;This function plots the time evolution of factor loadings provided by the **coeffs** output of **factor_regression** with a specified **window**. Unlike in the static case, **coeffs** cannot contain only the factor decomposition of a *single* stock. If **r2** is supplied, the function also plots a separate chart showing the evolution of the corresponding R² scores.
 
-- **plot_coeffs(coeffs, r2 = None, title = "Factor decomposition")**:  
+- **`plot_coeffs(coeffs, r2 = None, title = "Factor decomposition")`**:  
   &nbsp;&nbsp;&nbsp;A universal plotting function that automatically distinguishes between the static and rolling cases based on the input and generates the appropriate plots accordingly.
 
-- **plot_alpha(coeffs, tstats, title = "Alpha and t-statistic over time")**:  
+- **`plot_alpha(coeffs, tstats, title = "Alpha and t-statistic over time")`**:  
   &nbsp;&nbsp;&nbsp;This function plots the time evolution of the annualized *alpha* and its t-statistic from the **coeffs** output of **factor_regression** using a specified **window**. It then highlights the intervals where the t-statistic indicates statistical significance.
